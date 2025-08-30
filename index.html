@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Image Upscaler - Enhance SD to HD, 4K, 8K Online Tool</title>
+    <meta name="description" content="Free online image upscaler tool. Enhance image resolution from SD to HD, 4K, and 8K without losing quality. Perfect for photographers and designers.">
+    <meta name="keywords" content="image upscaler, resolution enhancer, SD to HD, SD to 4K, image quality improver, online photo enhancer, free image upscaling, AI image upscale, photo resolution increase">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .drop-area {
+            border: 3px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .drop-area:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .drop-area i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-upload {
+            background: #4a90e2;
+        }
+        
+        .btn-upload:hover {
+            background: #357abD;
+        }
+        
+        .btn-upscale {
+            background: #5cb85c;
+        }
+        
+        .btn-upscale:hover {
+            background: #4da44d;
+        }
+        
+        .btn-download {
+            background: #f0ad4e;
+        }
+        
+        .btn-download:hover {
+            background: #e09c3d;
+        }
+        
+        .resolution-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .resolution-btn {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .side-by-side-container {
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-half {
+            flex: 1;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .image-half h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 250px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .image-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4a90e2, #5cb85c);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .quality-slider {
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4a90e2;
+            cursor: pointer;
+        }
+        
+        .ad-container {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .side-by-side-container {
+                flex-direction: column;
+            }
+            
+            .image-half {
+                margin-bottom: 15px;
+            }
+            
+            .resolution-btns {
+                flex-direction: column;
+            }
+            
+            .resolution-btn {
+                width: 100%;
+            }
+            
+            .features {
+                flex-direction: column;
+            }
+            
+            .feature {
+                min-width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .drop-area {
+                padding: 25px 15px;
+            }
+            
+            .drop-area i {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .image-preview {
+                height: 200px;
+            }
+            
+            .feature i {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    
+    <!-- Ad Scripts -->
+    <script type='text/javascript' src='//specificallyglimmerdispose.com/24/55/37/245537e0e9d108a463e7d2e846816773.js'></script>
+    <script type='text/javascript' src='//specificallyglimmerdispose.com/31/d6/27/31d627f041dbf79dd4b7bd1e1b4c1c5e.js'></script>
+</head>
+<body>
+    <!-- Popunder ad is loaded via the script above -->
+    
+    <div class="container">
+        <header>
+            <h1>Professional Image Upscaler</h1>
+            <p class="subtitle">Enhance your image resolution from SD to HD, 4K, and 8K without losing quality. Free online tool with instant results.</p>
+        </header>
+        
+        <!-- Native Banner Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <script async="async" data-cfasync="false" src="//specificallyglimmerdispose.com/9cb10ef04b078295c1d17f98196e7638/invoke.js"></script>
+            <div id="container-9cb10ef04b078295c1d17f98196e7638"></div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i>🚀</i>
+                <h3>Fast Processing</h3>
+                <p>Upscale images in seconds with our advanced algorithm</p>
+            </div>
+            <div class="feature">
+                <i>💯</i>
+                <h3>High Quality</h3>
+                <p>Maintain image quality even at 8K resolution</p>
+            </div>
+            <div class="feature">
+                <i>🔒</i>
+                <h3>Privacy Guaranteed</h3>
+                <p>Your images are processed locally and never uploaded</p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="upload-section">
+                <h2 class="section-title">Upload Image</h2>
+                <div class="drop-area" id="dropArea">
+                    <i>📁</i>
+                    <p>Drag & Drop your image here</p>
+                    <p>or</p>
+                    <button class="btn btn-upload" id="browseBtn">Browse Files</button>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*">
+                </div>
+                
+                <div class="quality-slider">
+                    <div class="slider-label">
+                        <span>Output Quality:</span>
+                        <span id="qualityValue">95%</span>
+                    </div>
+                    <input type="range" id="qualitySlider" min="70" max="100" value="95">
+                </div>
+                
+                <div class="resolution-btns">
+                    <button class="btn resolution-btn btn-upscale" data-resolution="2x">2x Upscale</button>
+                    <button class="btn resolution-btn btn-upscale" data-resolution="4k">4K Upscale</button>
+                    <button class="btn resolution-btn btn-upscale" data-resolution="8k">8K Upscale</button>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                
+                <!-- Banner Ad -->
+                <div class="ad-container">
+                    <div class="ad-label">Advertisement</div>
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '91f4c1b41ef2bc94bb0108103115b089',
+                            'format' : 'iframe',
+                            'height' : 90,
+                            'width' : 728,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//specificallyglimmerdispose.com/91f4c1b41ef2bc94bb0108103115b089/invoke.js"></script>
+                </div>
+            </div>
+            
+            <div class="preview-section">
+                <h2 class="section-title">Side-by-Side Comparison</h2>
+                
+                <div class="side-by-side-container">
+                    <div class="image-half">
+                        <h3>Original Image</h3>
+                        <div class="image-preview" id="originalPreview">
+                            <p>Original will appear here</p>
+                        </div>
+                    </div>
+                    <div class="image-half">
+                        <h3>Upscaled Image</h3>
+                        <div class="image-preview" id="upscaledPreview">
+                            <p>Upscaled will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-info">
+                    <div class="info-item">
+                        <span>Original Resolution:</span>
+                        <span id="originalRes">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Original Size:</span>
+                        <span id="originalSize">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Upscaled Resolution:</span>
+                        <span id="upscaledRes">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Upscaled Size:</span>
+                        <span id="upscaledSize">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Scale Factor:</span>
+                        <span id="scaleFactor">-</span>
+                    </div>
+                </div>
+                
+                <div class="download-section">
+                    <button class="btn btn-download" id="downloadBtn" disabled>Download Upscaled Image</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Social Bar Script is loaded in head -->
+        
+        <footer>
+            <p>© 2025 Professional Image Upscaler | Free Online Tool to Enhance Image Resolution from SD to HD, 4K, 8K</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseBtn = document.getElementById('browseBtn');
+            const originalPreview = document.getElementById('originalPreview');
+            const upscaledPreview = document.getElementById('upscaledPreview');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const progressBar = document.getElementById('progressBar');
+            const resolutionBtns = document.querySelectorAll('.resolution-btn');
+            const qualitySlider = document.getElementById('qualitySlider');
+            const qualityValue = document.getElementById('qualityValue');
+            
+            const originalRes = document.getElementById('originalRes');
+            const originalSize = document.getElementById('originalSize');
+            const upscaledRes = document.getElementById('upscaledRes');
+            const upscaledSize = document.getElementById('upscaledSize');
+            const scaleFactor = document.getElementById('scaleFactor');
+            
+            let originalImage = null;
+            let upscaledImage = null;
+            let originalImageFile = null;
+            
+            // Event listeners
+            browseBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            dropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropArea.style.background = 'rgba(255, 255, 255, 0.15)';
+                dropArea.style.borderColor = 'rgba(255, 255, 255, 0.7)';
+            });
+            
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.style.background = '';
+                dropArea.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+            });
+            
+            dropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropArea.style.background = '';
+                dropArea.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect(e);
+                }
+            });
+            
+            downloadBtn.addEventListener('click', downloadImage);
+            
+            resolutionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const resolution = btn.getAttribute('data-resolution');
+                    upscaleImage(resolution);
+                });
+            });
+            
+            qualitySlider.addEventListener('input', () => {
+                qualityValue.textContent = `${qualitySlider.value}%`;
+            });
+            
+            // Functions
+            function handleFileSelect(e) {
+                const file = e.target.files[0] || e.dataTransfer.files[0];
+                
+                if (!file || !file.type.match('image.*')) {
+                    alert('Please select an image file.');
+                    return;
+                }
+                
+                originalImageFile = file;
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImage = img;
+                        displayImage(img, originalPreview);
+                        
+                        // Update file info
+                        originalRes.textContent = `${img.width} × ${img.height}`;
+                        originalSize.textContent = formatFileSize(file.size);
+                        
+                        // Reset upscaled info
+                        upscaledRes.textContent = '-';
+                        upscaledSize.textContent = '-';
+                        scaleFactor.textContent = '-';
+                        
+                        // Clear upscaled preview
+                        upscaledPreview.innerHTML = '<p>Upscaled will appear here</p>';
+                        
+                        // Enable upscale buttons
+                        resolutionBtns.forEach(btn => {
+                            btn.disabled = false;
+                        });
+                        
+                        downloadBtn.disabled = true;
+                    };
+                    img.src = e.target.result;
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            function displayImage(img, container) {
+                container.innerHTML = '';
+                const imgElement = document.createElement('img');
+                imgElement.src = img.src;
+                container.appendChild(imgElement);
+            }
+            
+            function upscaleImage(resolution) {
+                if (!originalImage) return;
+                
+                // Simulate processing with a progress bar
+                simulateProgress(() => {
+                    let targetWidth, targetHeight;
+                    
+                    switch(resolution) {
+                        case '2x':
+                            targetWidth = originalImage.width * 2;
+                            targetHeight = originalImage.height * 2;
+                            break;
+                        case '4k':
+                            // For 4K, we want at least 3840x2160 but maintain aspect ratio
+                            const minWidth4k = 3840;
+                            const minHeight4k = 2160;
+                            
+                            if (originalImage.width/originalImage.height > minWidth4k/minHeight4k) {
+                                targetWidth = minWidth4k;
+                                targetHeight = Math.round(minWidth4k * originalImage.height / originalImage.width);
+                            } else {
+                                targetHeight = minHeight4k;
+                                targetWidth = Math.round(minHeight4k * originalImage.width / originalImage.height);
+                            }
+                            break;
+                        case '8k':
+                            // For 8K, we want at least 7680x4320 but maintain aspect ratio
+                            const minWidth8k = 7680;
+                            const minHeight8k = 4320;
+                            
+                            if (originalImage.width/originalImage.height > minWidth8k/minHeight8k) {
+                                targetWidth = minWidth8k;
+                                targetHeight = Math.round(minWidth8k * originalImage.height / originalImage.width);
+                            } else {
+                                targetHeight = minHeight8k;
+                                targetWidth = Math.round(minHeight8k * originalImage.width / originalImage.height);
+                            }
+                            break;
+                        default:
+                            targetWidth = originalImage.width * 2;
+                            targetHeight = originalImage.height * 2;
+                    }
+                    
+                    // In a real application, you would use a sophisticated upscaling algorithm here
+                    // For this demo, we're just resizing the image
+                    const canvas = document.createElement('canvas');
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Use image smoothing for better quality
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    
+                    ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
+                    
+                    // Create new image from canvas
+                    upscaledImage = new Image();
+                    upscaledImage.onload = function() {
+                        // Show upscaled preview
+                        displayImage(upscaledImage, upscaledPreview);
+                        
+                        // Update upscaled info
+                        upscaledRes.textContent = `${targetWidth} × ${targetHeight}`;
+                        
+                        // Calculate approximate file size (this is just an estimate)
+                        const approximateSize = Math.round((targetWidth * targetHeight * 4) / 1024);
+                        upscaledSize.textContent = `${approximateSize} KB (approximate)`;
+                        
+                        // Calculate scale factor
+                        const scaleX = (targetWidth / originalImage.width).toFixed(2);
+                        const scaleY = (targetHeight / originalImage.height).toFixed(2);
+                        scaleFactor.textContent = `${scaleX}× (width) ${scaleY}× (height)`;
+                        
+                        // Enable download button
+                        downloadBtn.disabled = false;
+                    };
+                    upscaledImage.src = canvas.toDataURL('image/jpeg', qualitySlider.value / 100);
+                });
+            }
+            
+            function simulateProgress(callback) {
+                progressBar.style.width = '0%';
+                let width = 0;
+                
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        setTimeout(callback, 300);
+                    } else {
+                        width += Math.random() * 15;
+                        progressBar.style.width = Math.min(width, 100) + '%';
+                    }
+                }, 100);
+            }
+            
+            function downloadImage() {
+                if (!upscaledImage) return;
+                
+                const link = document.createElement('a');
+                link.download = getDownloadFileName();
+                link.href = upscaledImage.src;
+                link.click();
+            }
+            
+            function getDownloadFileName() {
+                const originalName = originalImageFile.name.split('.')[0];
+                const resolution = upscaledImage.width > 7000 ? '8K' : (upscaledImage.width > 3000 ? '4K' : 'HD');
+                return `${originalName}_${resolution}_upscaled.jpg`;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+                else return (bytes / 1048576).toFixed(2) + ' MB';
+            }
+        });
+    </script>
+</body>
+</html>
